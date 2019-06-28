@@ -14,6 +14,7 @@
     - debug: var=esxi_host
     - debug: var=datacenter
     - debug: var=template
+    - debug: var=vm_hostname
     - debug: var=manageiq.api_url
     - debug: var=manageiq.api_token
     - debug: var=manageiq.service
@@ -32,8 +33,8 @@
       vsphere_guest:
         validate_certs: no
         vcenter_hostname: "{{ vcenter_hostname }}"
-        guest: "{{ inventory_hostname }}"
-        power_on_after_clone: no
+        guest: "{{ vm_hostname }}"
+        power_on_after_clone: yes
         from_template: yes
         template_src: "{{ template }}"
         esxi:
@@ -44,7 +45,7 @@
       vsphere_guest:
         validate_certs: no
         vcenter_hostname: "{{ vcenter_hostname }}"
-        guest: "{{ inventory_hostname }}"
+        guest: "{{ vm_hostname }}"
         vmware_guest_facts: yes
       register: new_vm
 
