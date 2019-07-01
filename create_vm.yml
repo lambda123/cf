@@ -11,14 +11,14 @@
     retry_interval: 20
 
   tasks:
-    - debug: var=vcenter_hostname
-    - debug: var=esxi_host
-    - debug: var=datacenter
-    - debug: var=template
-    - debug: var=vm_hostname
-    - debug: var=manageiq.api_url
-    - debug: var=manageiq.api_token
-    - debug: var=manageiq.service
+#    - debug: var=vcenter_hostname
+#    - debug: var=esxi_host
+#    - debug: var=datacenter
+#    - debug: var=template
+#    - debug: var=vm_hostname
+#    - debug: var=manageiq.api_url
+#    - debug: var=manageiq.api_token
+#    - debug: var=manageiq.service
 
     - name: Set the Provider URL
       set_fact:
@@ -28,7 +28,7 @@
       set_fact:
         svc_url: "/api/{{ manageiq.service }}"
 
-    - debug: var=svc_url 
+#    - debug: var=svc_url 
 
 # get definition of vsphere module : https://docs.ansible.com/ansible/latest/modules/vsphere_guest_module.html
     - name: Create Virtual Machines
@@ -51,11 +51,11 @@
         vmware_guest_facts: yes
       register: new_vm
 
-    - debug: var=new_vm    
+#    - debug: var=new_vm    
 
     - set_fact: new_vm_uuid="{{ new_vm.ansible_facts.hw_product_uuid }}"
 
-    - debug: var=new_vm_uuid
+#    - debug: var=new_vm_uuid
 
     - name: Refresh provider in CloudForms
       uri:
@@ -70,11 +70,14 @@
           Content-Type: "application/json" 
         status_code: 200
       register: output
-    - debug: var=output
+
+#    - debug: var=output
+
     - name: set the task href
       set_fact:
         task_url: "{{ output.json.task_href}}"
-    - debug: var=task_url
+
+#    - debug: var=task_url
 
     - name: Wait for the refresh to end
       uri:
@@ -90,11 +93,12 @@
       failed_when: task_result.json.status == 'Error'
       retries: "{{max_retries}}"
       delay: "{{retry_interval}}"
-    - debug: var=task_result
+
+#    - debug: var=task_result
     
     - set_fact: find_vm_url="{{ manageiq.api_url }}/api/vms?expand=resources&attributes=href,uid_ems&filter[]=uid_ems='{{ new_vm_uuid }}'"
 
-    - debug: var=find_vm_url
+#    - debug: var=find_vm_url
 
     - name: Call to CloudForms to find href for new_vm_uuid
       uri:
@@ -108,11 +112,11 @@
         return_content: yes
       register: token_output
 
-    - debug: var=token_output
+#    - debug: var=token_output
 
     - set_fact: cf_vm_href="{{ token_output.json.resources[0].href }}"
 
-    - debug: var=cf_vm_href
+#    - debug: var=cf_vm_href
 
     - name: Create an array of vms
       set_fact:
@@ -120,7 +124,7 @@
       with_items:
         - "{{ cf_vm_href }}"
 
-    - debug: var=vms
+#    - debug: var=vms
     
     - name: Register vm with the service
       uri:
@@ -137,5 +141,5 @@
         status_code: 200
       register: output
 
-    - debug: var=output.json.results[0].success
+#    - debug: var=output.json.results[0].success
 
