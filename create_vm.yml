@@ -4,6 +4,7 @@
   gather_facts: false
   connection: local
 
+# get provider id from API endpoint
   vars:
     provider_id: "1000000000002"
     max_retries: 9
@@ -29,6 +30,7 @@
 
     - debug: var=svc_url 
 
+# get definition of vsphere module : https://docs.ansible.com/ansible/latest/modules/vsphere_guest_module.html
     - name: Create Virtual Machines
       vsphere_guest:
         validate_certs: no
