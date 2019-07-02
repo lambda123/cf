@@ -44,7 +44,7 @@
           datacenter: "{{ datacenter }}"
           hostname: "{{ esxi_host }}"
 
-- name: Create Virtual Machines
+    - name: Create Virtual Machines
       vsphere_guest:
         validate_certs: no
         vcenter_hostname: "{{ vcenter_hostname }}"
