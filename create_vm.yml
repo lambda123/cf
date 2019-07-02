@@ -1,7 +1,7 @@
 
 ---
 - hosts: all
-  gather_facts: true
+  gather_facts: false
   connection: local
 
 # get provider id from API endpoint
@@ -19,7 +19,7 @@
 #    - debug: var=manageiq.api_url
 #    - debug: var=manageiq.api_token
 #    - debug: var=manageiq.service
-    - debug: var=ansible_default_ipv4.address
+#    - debug: var=ansible_default_ipv4.address
 
     - name: Set the Provider URL
       set_fact:
