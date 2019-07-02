@@ -44,7 +44,7 @@
           mem.hotadd:  yes
         vm_hardware:
           memory_mb: "{{ ram }}"
-          num_cpus: "{{ vcpu }}"
+          num_cpus: 4
         template_src: "{{ template }}"
         esxi:
           datacenter: "{{ datacenter }}"
