@@ -6,7 +6,7 @@
 
 # get provider id from API endpoint
   vars:
-    provider_id: "1000000000002"
+    provider_id: "1"
     max_retries: 9
     retry_interval: 20
 
