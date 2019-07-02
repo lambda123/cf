@@ -56,8 +56,8 @@
           vcpu.hotadd: yes
           mem.hotadd:  yes
         vm_hardware:
-#          memory_mb: "{{ ram }}"
-          num_cpus: "{{ vcpu }}"
+          memory_mb: "4096"
+          num_cpus: "4"
 
     - name: Gather the facts for the VM
       vsphere_guest:
