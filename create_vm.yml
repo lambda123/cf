@@ -20,6 +20,8 @@
 #    - debug: var=manageiq.api_token
 #    - debug: var=manageiq.service
 #    - debug: var=ansible_default_ipv4.address
+    - debug: var=ram
+    - debug: var=vcpu
 
     - name: Set the Provider URL
       set_fact:
@@ -54,7 +56,7 @@
           vcpu.hotadd: yes
           mem.hotadd:  yes
         vm_hardware:
-          memory_mb: "{{ ram }}"
+#          memory_mb: "{{ ram }}"
           num_cpus: "{{ vcpu }}"
 
     - name: Gather the facts for the VM
