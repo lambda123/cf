@@ -37,18 +37,25 @@
         validate_certs: no
         vcenter_hostname: "{{ vcenter_hostname }}"
         guest: "{{ vm_hostname }}"
-        power_on_after_clone: yes
+        power_on_after_clone: no
         from_template: yes
+        template_src: "{{ template }}"
+        esxi:
+          datacenter: "{{ datacenter }}"
+          hostname: "{{ esxi_host }}"
+
+- name: Create Virtual Machines
+      vsphere_guest:
+        validate_certs: no
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        guest: "{{ vm_hostname }}"
+        state: present
         vm_extra_config:
           vcpu.hotadd: yes
           mem.hotadd:  yes
         vm_hardware:
           memory_mb: "{{ ram }}"
-          num_cpus: 4
-        template_src: "{{ template }}"
-        esxi:
-          datacenter: "{{ datacenter }}"
-          hostname: "{{ esxi_host }}"
+          num_cpus: "{{ vcpu }}"
 
     - name: Gather the facts for the VM
       vsphere_guest:
