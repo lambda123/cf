@@ -36,7 +36,7 @@
         validate_certs: no
         vcenter_hostname: "{{ vcenter_hostname }}"
         guest: "{{ vm_hostname }}"
-        power_on_after_clone: "{{ poweron }}"
+        power_on_after_clone: yes
         from_template: yes
         template_src: "{{ template }}"
         esxi:
