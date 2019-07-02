@@ -39,8 +39,11 @@
         guest: "{{ vm_hostname }}"
         power_on_after_clone: yes
         from_template: yes
+        vm_extra_config:
+          vcpu.hotadd: yes
+          mem.hotadd:  yes
         vm_hardware:
-          memory_mb: 2048
+          memory_mb: "{{ ram }}"
           num_cpus: "{{ vcpu }}"
         template_src: "{{ template }}"
         esxi:
