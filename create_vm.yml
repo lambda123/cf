@@ -61,7 +61,7 @@
           vcpu.hotadd: yes
           mem.hotadd:  yes
         vm_hardware:
-          memory_mb: 8192
+          memory_mb: "{{ ram | int }}"
           num_cpus: "{{ vcpu | int }}"
 
     - name: Gather the facts for the VM
