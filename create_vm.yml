@@ -39,6 +39,9 @@
         guest: "{{ vm_hostname }}"
         power_on_after_clone: yes
         from_template: yes
+        vm_hardware:
+          memory_mb: 2048
+          num_cpus: "{{ vcpu }}"
         template_src: "{{ template }}"
         esxi:
           datacenter: "{{ datacenter }}"
