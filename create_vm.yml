@@ -49,7 +49,7 @@
         validate_certs: no
         vcenter_hostname: "{{ vcenter_hostname }}"
         guest: "{{ vm_hostname }}"
-        state: seconfigured
+        state: reconfigured
         vm_extra_config:
           vcpu.hotadd: yes
           mem.hotadd:  yes
