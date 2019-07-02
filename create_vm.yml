@@ -23,6 +23,11 @@
     - debug: var=ram
     - debug: var=vcpu
 
+    - set_fact: ram=8192
+    
+    -debug: var=ram
+    
+    
     - name: Set the Provider URL
       set_fact:
         provider_url: "{{ manageiq.api_url }}/api/providers/{{ provider_id }}"
