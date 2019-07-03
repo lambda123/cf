@@ -54,7 +54,7 @@
         datacenter: "{{ datacenter }}"
         name: "{{ vm_hostname }}"
         template: "{{ template }}"
-        state: poweredon
+        state: present
         cluster: "{{ vmware_cluster }}"
         folder: "{{ folder }}"
         hardware:
