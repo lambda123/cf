@@ -10,6 +10,17 @@
     retry_interval: 20
 
   tasks:
+    - debug: var=vcenter_hostname
+    - debug: var=vm_hostname
+    
+    - name: Set the Provider URL
+      set_fact:
+        provider_url: "{{ manageiq.api_url }}/api/providers/{{ provider_id }}"
+
+    - name: Set the Service URL
+      set_fact:
+        svc_url: "/api/{{ manageiq.service }}"
+
     - name: Remove VM
       vmware_guest:
         validate_certs: False      
