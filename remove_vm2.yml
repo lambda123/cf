@@ -34,7 +34,7 @@
       set_fact:
         svc_url: "/api/{{ manageiq.service }}"
 
-    - set_fact: vcenter_hostname="{{ current_servicejson.options.dialog.dialog_param_vcenter_hostname }}"
+    - set_fact: vcenter_hostname="{{ current_service.json.options.dialog.dialog_param_vcenter_hostname }}"
     - set_fact: vm_hostname="{{ current_service.json.options.dialog.dialog_param_vm_hostname }}"
 
     - name: Remove VM
