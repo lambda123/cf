@@ -80,12 +80,14 @@
       vmware_vm_facts:
         validate_certs: no
         hostname: "{{ vcenter_hostname }}"
-        name: "{{ vm_hostname }}"
-      register: new_vm
+        vm_type: vm
+      register: all_vms
 
-    - debug: var=new_vm    
+    - debug: var=all_vms    
 
-    - set_fact: new_vm_uuid="{{ new_vm.ansible_facts.uuid }}"
+    - fail:
+
+    - set_fact: new_vm_uuid="{{ all_vms.ansible_facts.uuid }}"
 
     - debug: var=new_vm_uuid
 
