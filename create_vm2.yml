@@ -47,6 +47,7 @@
         template: "{{ template }}"
         state: present
         cluster: "{{ vmware_cluster }}"
+        folder: "{{ folder }}"
         hardware:
           memory_mb: "{{ ram }}"
           num_cpus: "{{ vcpu }}"
