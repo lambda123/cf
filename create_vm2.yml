@@ -85,9 +85,12 @@
 
     - debug: var=all_vms    
 
-    - fail:
 
-    - set_fact: new_vm_uuid="{{ all_vms.ansible_facts.uuid }}"
+    - set_fact: new_vm_uuid="{{ item.uuid }}"
+      with_items:
+        - {{ all_vms.virtual_machines | json_query(query) }}
+      vars:
+        query: "[?guest_name=='{{ vm_hostname }}']"
 
     - debug: var=new_vm_uuid
 
