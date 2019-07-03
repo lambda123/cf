@@ -36,14 +36,14 @@
       set_fact:
         svc_url: "/api/{{ manageiq.service }}"
 
-    - name: Gather the facts for the template
-      vmware_vm_facts:
-        validate_certs: no
-        hostname: "{{ vcenter_hostname }}"
-        name: "{{ template }}"
-      register: new_vm
-
-    - debug: var=new_vm    
+        #    - name: Gather the facts for the template
+        #      vmware_vm_facts:
+        #        validate_certs: no
+        #        hostname: "{{ vcenter_hostname }}"
+        #        name: "{{ template }}"
+        #      register: new_vm
+        #
+        #    - debug: var=new_vm    
 #    - debug: var=svc_url 
 
 # get definition of vsphere module : https://docs.ansible.com/ansible/latest/modules/vsphere_guest_module.html
