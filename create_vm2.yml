@@ -61,7 +61,6 @@
           memory_mb: "{{ ram }}"
           num_cpus: "{{ vcpu }}"
           hotadd: True
-          version: 12
         wait_for_ip_address: True
 
         #   - name: Update Virtual Machines
