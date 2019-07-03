@@ -209,6 +209,19 @@
           action: edit
           resource:
             name: "{{ current_service.json.name }} {{ timestamp }}"  
-            
+
+
+    - name: Get the existing service name
+      uri:
+        url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
+        method: GET
+        validate_certs: no
+        headers:
+          X-Auth-Token: "{{ manageiq.api_token }}"
+        body_format: json
+      register: current_service  
+
+    - debug: var=current_service
+    
 #    - debug: var=output.json.results[0].success
 
