@@ -25,7 +25,7 @@
       register: current_service  
 
     - debug: var=current_service
-    
+
     - name: Set the Provider URL
       set_fact:
         provider_url: "{{ manageiq.api_url }}/api/providers/{{ provider_id }}"
@@ -33,6 +33,9 @@
     - name: Set the Service URL
       set_fact:
         svc_url: "/api/{{ manageiq.service }}"
+
+    - set_fact: vcenter_hostname="{{ current_service.dialog.dialog_param_vcenter_hostname }}"
+    - set_fact: vm_hostname="{{ current_service.dialog.dialog_param_vm_hostname }}"
 
     - name: Remove VM
       vmware_guest:
