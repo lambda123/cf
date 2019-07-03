@@ -61,7 +61,7 @@
           memory_mb: "{{ ram }}"
           num_cpus: "{{ vcpu }}"
           hotadd: True
-        wait_for_ip_address: True
+        wait_for_ip_address: False
 
         #   - name: Update Virtual Machines
         #     vmware_guest:
