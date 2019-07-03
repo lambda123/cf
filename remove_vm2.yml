@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+
+  tasks:
+    - name: Remove VM
+      vmware_guest:
+        validate_certs: False      
+        vcenter_hostname: "{{ vcenter_hostname }}"
+        name: "{{ vm_hostname }}"
+        state: absent
