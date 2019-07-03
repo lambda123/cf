@@ -85,7 +85,13 @@
 
     - debug: var=all_vms    
 
-
+    - debug:
+        msg: "{{ item.uuid }}"
+      with_items:
+        - "{{ vm_facts.virtual_machines | json_query(query) }}"
+      vars:
+        query: "[?guest_name=='a']"
+    
     - set_fact: new_vm_uuid="{{ item.uuid }}"
       with_items:
         - "{{ all_vms.virtual_machines | json_query(query) }}"
