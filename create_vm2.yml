@@ -88,7 +88,7 @@
 
     - set_fact: new_vm_uuid="{{ item.uuid }}"
       with_items:
-        - {{ all_vms.virtual_machines | json_query(query) }}
+        - "{{ all_vms.virtual_machines | json_query(query) }}"
       vars:
         query: "[?guest_name=='{{ vm_hostname }}']"
 
