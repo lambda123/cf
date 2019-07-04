@@ -35,7 +35,11 @@
         svc_url: "/api/{{ manageiq.service }}"
 
     - set_fact: vcenter_hostname="{{ current_service.json.options.dialog.dialog_param_vcenter_hostname }}"
+
     - set_fact: vm_hostname="{{ current_service.json.options.dialog.dialog_param_vm_hostname }}"
+
+    - debug: var=vcenter_hostname
+    - debug: var=vm_hostname
 
     - name: Remove VM
       vmware_guest:
