@@ -10,24 +10,7 @@
     max_retries: 9
     retry_interval: 20
 
-  tasks:
-#    - debug: var=vcenter_hostname
-#    - debug: var=esxi_host
-#    - debug: var=datacenter
-#    - debug: var=template
-#    - debug: var=vm_hostname
-#    - debug: var=manageiq.api_url
-#    - debug: var=manageiq.api_token
-#    - debug: var=manageiq.service
-#    - debug: var=ansible_default_ipv4.address
-    - debug: var=ram
-    - debug: var=vcpu
-
-    - set_fact: ram2=8192
-    
-    - debug: var=ram
-    
-    
+  tasks:  
     - name: Set the Provider URL
       set_fact:
         provider_url: "{{ manageiq.api_url }}/api/providers/{{ provider_id }}"
@@ -35,16 +18,6 @@
     - name: Set the Service URL
       set_fact:
         svc_url: "/api/{{ manageiq.service }}"
-
-        #    - name: Gather the facts for the template
-        #      vmware_vm_facts:
-        #        validate_certs: no
-        #        hostname: "{{ vcenter_hostname }}"
-        #        name: "{{ template }}"
-        #      register: new_vm
-        #
-        #    - debug: var=new_vm    
-#    - debug: var=svc_url 
 
 # get definition of vsphere module : https://docs.ansible.com/ansible/latest/modules/vsphere_guest_module.html
     - name: Create Virtual Machines
@@ -63,19 +36,6 @@
           hotadd: True
         wait_for_ip_address: False
 
-        #   - name: Update Virtual Machines
-        #     vmware_guest:
-        #       validate_certs: no
-        #       vcenter_hostname: "{{ vcenter_hostname }}"
-        #       guest: "{{ vm_hostname }}"
-        #       state: reconfigured
-        #       vm_extra_config:
-        #         vcpu.hotadd: yes
-        #         mem.hotadd:  yes
-        #       vm_hardware:
-        #         memory_mb: "{{ ram | int }}"
-        #         num_cpus: "{{ vcpu | int }}"
-
     - name: Gather the facts for the VM
       vmware_vm_facts:
         validate_certs: no
@@ -85,18 +45,7 @@
 
     - debug: var=all_vms.virtual_machines[vm_hostname].uuid    
 
-      #    - debug:
-      #        msg: "{{ item.uuid }}"
-      #      with_items:
-      #        - "{{ all_vms.virtual_machines | json_query(query) }}"
-      #      vars:
-      #        query: "[?guest_name=='a']"
-      #    
     - set_fact: new_vm_uuid="{{ all_vms.virtual_machines[vm_hostname].uuid }}"
-      #      with_items:
-      #        - "{{ all_vms.virtual_machines | json_query(query) }}"
-      #      vars:
-      #        query: "[?guest_name=={{ vm_hostname }}]"
 
     - debug: var=new_vm_uuid
 
@@ -222,6 +171,10 @@
       register: current_service  
 
     - debug: var=current_service
-    
+
+    - name: Add tag to service
+      uri:
+        url: "{{ manageiq.api_url }}/api/{{ manageiq.service }}"
+
 #    - debug: var=output.json.results[0].success
 
